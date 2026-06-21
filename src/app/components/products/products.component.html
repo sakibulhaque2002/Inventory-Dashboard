@@ -1,0 +1,57 @@
+<div class="products-page">
+
+  <div class="page-header">
+    <h2>Products</h2>
+    <a routerLink="/add-product" class="btn btn-primary">+ Add Product</a>
+  </div>
+
+  <!-- search and filter bar -->
+  <div class="toolbar">
+    <input
+      type="text"
+      placeholder="Search by name..."
+      [(ngModel)]="searchTerm"
+      class="search-input"
+    />
+    <select [(ngModel)]="selectedCategory" class="category-select">
+      <option value="">All Categories</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+  </div>
+
+  <!-- product table -->
+  <table class="product-table" *ngIf="filtered.length > 0; else empty">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let p of filtered"
+        [ngClass]="{ 'low-stock-row': isLowStock(p) }"
+      >
+        <td>
+          {{ p.name }}
+          <span class="badge-low" *ngIf="isLowStock(p)">Low Stock</span>
+        </td>
+        <td>{{ p.category }}</td>
+        <td>${{ p.price | number: '1.2-2' }}</td>
+        <td [ngClass]="{ 'stock-critical': isLowStock(p) }">{{ p.stock }}</td>
+        <td class="actions">
+          <a [routerLink]="['/edit-product', p.id]" class="btn btn-edit">Edit</a>
+          <button (click)="delete(p.id)" class="btn btn-delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #empty>
+    <p class="empty-msg">No products found.</p>
+  </ng-template>
+
+</div>
