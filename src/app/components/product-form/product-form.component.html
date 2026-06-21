@@ -16,14 +16,6 @@
     </div>
 
     <div class="field">
-      <label for="category">Category</label>
-      <input id="category" type="text" formControlName="category" placeholder="e.g. Electronics" />
-      @if (isInvalid('category')) {
-        <span class="error">Category is required.</span>
-      }
-    </div>
-
-    <div class="field">
       <label for="price">Price ($)</label>
       <input id="price" type="number" formControlName="price" placeholder="0.00" />
       @if (isInvalid('price')) {

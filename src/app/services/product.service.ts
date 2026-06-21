@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 
 const SEED_PRODUCTS: Product[] = [
-  { id: 1, name: 'Wireless Mouse', price: 29.99, stock: 45, category: 'Electronics', lowStockThreshold: 10 },
-  { id: 2, name: 'USB-C Hub', price: 49.99, stock: 8, category: 'Electronics', lowStockThreshold: 10 },
-  { id: 3, name: 'Notebook A5', price: 4.99, stock: 120, category: 'Stationery', lowStockThreshold: 20 },
-  { id: 4, name: 'Ballpoint Pen (12pk)', price: 3.49, stock: 5, category: 'Stationery', lowStockThreshold: 15 },
-  { id: 5, name: 'Desk Lamp', price: 34.99, stock: 22, category: 'Furniture', lowStockThreshold: 5 },
-  { id: 6, name: 'Office Chair', price: 199.99, stock: 3, category: 'Furniture', lowStockThreshold: 5 },
+  { id: 1, name: 'Wireless Mouse', price: 29.99, stock: 45, lowStockThreshold: 10 },
+  { id: 2, name: 'USB-C Hub', price: 49.99, stock: 8, lowStockThreshold: 10 },
+  { id: 3, name: 'Notebook A5', price: 4.99, stock: 120, lowStockThreshold: 20 },
+  { id: 4, name: 'Ballpoint Pen (12pk)', price: 3.49, stock: 5, lowStockThreshold: 15 },
+  { id: 5, name: 'Desk Lamp', price: 34.99, stock: 22, lowStockThreshold: 5 },
+  { id: 6, name: 'Office Chair', price: 199.99, stock: 3, lowStockThreshold: 5 },
 ];
 
 @Injectable({

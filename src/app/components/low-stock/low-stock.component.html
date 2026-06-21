@@ -9,7 +9,6 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Category</th>
           <th>Stock</th>
           <th>Threshold</th>
           <th>Status</th>
@@ -20,7 +19,6 @@
         @for (p of products; track p.id) {
           <tr>
             <td>{{ p.name }}</td>
-            <td>{{ p.category }}</td>
             <td class="stock-val" [class.zero]="p.stock === 0">{{ p.stock }}</td>
             <td>{{ p.lowStockThreshold }}</td>
             <td><span class="status-badge" [class.zero]="p.stock === 0">{{ p.stock | stockStatus:p.lowStockThreshold }}</span></td>

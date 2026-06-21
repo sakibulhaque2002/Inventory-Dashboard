@@ -15,22 +15,15 @@ import { Product } from '../../models/product.model';
 export class ProductsComponent {
   products: Product[] = [];
   searchTerm = '';
-  selectedCategory = '';
 
   constructor(private productService: ProductService) {
     this.products = this.productService.getAll();
   }
 
-  get categories(): string[] {
-    return [...new Set(this.products.map((p) => p.category))];
-  }
-
   get filtered(): Product[] {
-    return this.products.filter((p) => {
-      const matchesSearch = p.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-      const matchesCategory = this.selectedCategory ? p.category === this.selectedCategory : true;
-      return matchesSearch && matchesCategory;
-    });
+    return this.products.filter((p) =>
+      p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
   isLowStock(product: Product): boolean {

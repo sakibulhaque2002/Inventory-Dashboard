@@ -7,12 +7,6 @@
 
   <div class="toolbar">
     <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" class="search-input" />
-    <select [(ngModel)]="selectedCategory" class="category-select">
-      <option value="">All Categories</option>
-      @for (cat of categories; track cat) {
-        <option [value]="cat">{{ cat }}</option>
-      }
-    </select>
   </div>
 
   @if (filtered.length > 0) {
@@ -20,7 +14,6 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Category</th>
           <th>Price</th>
           <th>Stock</th>
           <th>Actions</th>
@@ -37,7 +30,6 @@
                 </span>
               }
             </td>
-            <td>{{ p.category }}</td>
             <td>${{ p.price | number: '1.2-2' }}</td>
             <td [ngClass]="{ 'stock-critical': p.stock === 0, 'stock-warn': p.stock > 0 && isLowStock(p) }">
               {{ p.stock }}
