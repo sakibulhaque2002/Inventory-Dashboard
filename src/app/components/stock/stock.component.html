@@ -2,6 +2,7 @@
 
   <div class="page-header">
     <h2>Stock Movement</h2>
+    <p class="subtitle">Add or remove inventory and keep stock levels up to date.</p>
   </div>
 
   <div class="movement-card">
@@ -16,20 +17,15 @@
       </select>
     </div>
 
-    @if (selectedProduct) {
-      <div class="stock-preview">
-        <span class="label">Current stock</span>
-        <span class="value" [ngClass]="{ low: isLowStock(selectedProduct) }">
-          {{ selectedProduct.stock }}
-        </span>
-      </div>
-    }
-
     <div class="field">
       <label>Movement Type</label>
       <div class="toggle-group">
-        <button type="button" [ngClass]="{ active: movementType === 'in' }"  (click)="movementType = 'in'">Stock In</button>
-        <button type="button" [ngClass]="{ active: movementType === 'out' }" (click)="movementType = 'out'">Stock Out</button>
+        <button type="button" class="toggle in"  [class.active]="movementType === 'in'"  (click)="movementType = 'in'">
+          <span class="arrow">↑</span> Stock In
+        </button>
+        <button type="button" class="toggle out" [class.active]="movementType === 'out'" (click)="movementType = 'out'">
+          <span class="arrow">↓</span> Stock Out
+        </button>
       </div>
     </div>
 
@@ -38,46 +34,39 @@
       <input id="amount" type="number" min="1" placeholder="Enter quantity" [(ngModel)]="amount" />
     </div>
 
+    @if (selectedProduct) {
+      <div class="preview" [class.in]="movementType === 'in'" [class.out]="movementType === 'out'">
+        <div class="preview-name">{{ selectedProduct.name }}</div>
+        <div class="preview-flow">
+          <div class="flow-item">
+            <span class="flow-label">Current</span>
+            <span class="flow-value">{{ selectedProduct.stock }}</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-item">
+            <span class="flow-label">After</span>
+            <span class="flow-value highlight">
+              {{ previewStock !== null ? previewStock : selectedProduct.stock }}
+            </span>
+          </div>
+        </div>
+      </div>
+    }
+
     @if (lastMessage) {
       <div class="feedback" [ngClass]="lastMessage.type">{{ lastMessage.text }}</div>
     }
 
-    <button class="btn btn-primary btn-submit" [disabled]="!canSubmit" (click)="apply()">
-      Apply Movement
+    <button
+      class="apply-btn"
+      [class.in]="movementType === 'in'"
+      [class.out]="movementType === 'out'"
+      [disabled]="!canSubmit"
+      (click)="apply()"
+    >
+      {{ movementType === 'in' ? 'Add to Stock' : 'Remove from Stock' }}
     </button>
 
-  </div>
-
-  <div class="overview">
-    <h3>All Products</h3>
-    <table class="stock-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Stock</th>
-          <th>Threshold</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (p of products; track p.id) {
-          <tr [ngClass]="{ 'low-row': isLowStock(p) }">
-            <td>{{ p.name }}</td>
-            <td>{{ p.category }}</td>
-            <td [ngClass]="{ 'low-val': isLowStock(p) }">{{ p.stock }}</td>
-            <td>{{ p.lowStockThreshold }}</td>
-            <td>
-              @if (p.stock | stockStatus:p.lowStockThreshold) {
-                <span class="status-badge" [class.out]="p.stock === 0" [class.low]="p.stock > 0 && isLowStock(p)">
-                  {{ p.stock | stockStatus:p.lowStockThreshold }}
-                </span>
-              }
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
   </div>
 
 </div>

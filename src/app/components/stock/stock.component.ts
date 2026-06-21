@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { StockStatusPipe } from '../../pipes/stock-status.pipe';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 
@@ -9,7 +8,7 @@ type MovementType = 'in' | 'out';
 
 @Component({
   selector: 'app-stock',
-  imports: [NgClass, FormsModule, StockStatusPipe],
+  imports: [NgClass, FormsModule],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.css',
 })
@@ -18,7 +17,6 @@ export class StockComponent implements OnInit {
   selectedProductId: number | null = null;
   movementType: MovementType = 'in';
   amount: number | null = null;
-
   lastMessage: { text: string; type: 'success' | 'error' } | null = null;
 
   constructor(private productService: ProductService) {}
@@ -33,16 +31,19 @@ export class StockComponent implements OnInit {
   }
 
   get canSubmit(): boolean {
-    return (
-      this.selectedProductId !== null &&
-      this.amount !== null &&
-      this.amount > 0
-    );
+    return this.selectedProductId !== null && this.amount !== null && this.amount > 0;
+  }
+
+  get previewStock(): number | null {
+    const product = this.selectedProduct;
+    if (!product || this.amount === null || this.amount <= 0) return null;
+    return this.movementType === 'out'
+      ? Math.max(0, product.stock - this.amount)
+      : product.stock + this.amount;
   }
 
   apply(): void {
     if (!this.canSubmit || !this.amount) return;
-
     const id = Number(this.selectedProductId);
 
     if (this.movementType === 'out') {
@@ -58,13 +59,8 @@ export class StockComponent implements OnInit {
       this.showMessage(`Added ${this.amount} units to stock.`, 'success');
     }
 
-    // refresh the list so the stock count updates instantly
     this.products = this.productService.getAll();
     this.amount = null;
-  }
-
-  isLowStock(product: Product): boolean {
-    return this.productService.isLowStock(product);
   }
 
   private showMessage(text: string, type: 'success' | 'error'): void {
