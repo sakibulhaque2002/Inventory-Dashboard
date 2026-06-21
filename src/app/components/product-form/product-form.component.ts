@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-form',
-  imports: [ReactiveFormsModule, NgIf, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css',
 })

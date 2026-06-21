@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NgFor, NgIf, NgClass, DecimalPipe } from '@angular/common';
+import { NgClass, DecimalPipe } from '@angular/common';
+import { StockStatusPipe } from '../../pipes/stock-status.pipe';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
@@ -7,7 +8,7 @@ import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-products',
-  imports: [NgFor, NgIf, NgClass, RouterLink, FormsModule, DecimalPipe],
+  imports: [NgClass, RouterLink, FormsModule, DecimalPipe, StockStatusPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })

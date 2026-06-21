@@ -1,0 +1,62 @@
+.dashboard {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+.card-link {
+  font-size: 0.8rem;
+  color: #3b82f6;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.card-link:hover { text-decoration: underline; }
+
+.card-warn {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.card-warn .card-value { color: #d97706; }
+
+.card-danger {
+  border-color: #ef4444;
+  background: #fff1f2;
+}
+
+.card-danger .card-value { color: #dc2626; }

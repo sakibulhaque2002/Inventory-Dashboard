@@ -5,53 +5,53 @@
     <a routerLink="/add-product" class="btn btn-primary">+ Add Product</a>
   </div>
 
-  <!-- search and filter bar -->
   <div class="toolbar">
-    <input
-      type="text"
-      placeholder="Search by name..."
-      [(ngModel)]="searchTerm"
-      class="search-input"
-    />
+    <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" class="search-input" />
     <select [(ngModel)]="selectedCategory" class="category-select">
       <option value="">All Categories</option>
-      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      @for (cat of categories; track cat) {
+        <option [value]="cat">{{ cat }}</option>
+      }
     </select>
   </div>
 
-  <!-- product table -->
-  <table class="product-table" *ngIf="filtered.length > 0; else empty">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let p of filtered"
-        [ngClass]="{ 'low-stock-row': isLowStock(p) }"
-      >
-        <td>
-          {{ p.name }}
-          <span class="badge-low" *ngIf="isLowStock(p)">Low Stock</span>
-        </td>
-        <td>{{ p.category }}</td>
-        <td>${{ p.price | number: '1.2-2' }}</td>
-        <td [ngClass]="{ 'stock-critical': isLowStock(p) }">{{ p.stock }}</td>
-        <td class="actions">
-          <a [routerLink]="['/edit-product', p.id]" class="btn btn-edit">Edit</a>
-          <button (click)="delete(p.id)" class="btn btn-delete">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <ng-template #empty>
+  @if (filtered.length > 0) {
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of filtered; track p.id) {
+          <tr [ngClass]="{ 'low-stock-row': isLowStock(p) }">
+            <td>
+              {{ p.name }}
+              @if (isLowStock(p)) {
+                <span class="badge" [class.badge-out]="p.stock === 0" [class.badge-low]="p.stock > 0">
+                  {{ p.stock | stockStatus:p.lowStockThreshold }}
+                </span>
+              }
+            </td>
+            <td>{{ p.category }}</td>
+            <td>${{ p.price | number: '1.2-2' }}</td>
+            <td [ngClass]="{ 'stock-critical': p.stock === 0, 'stock-warn': p.stock > 0 && isLowStock(p) }">
+              {{ p.stock }}
+            </td>
+            <td class="actions">
+              <a [routerLink]="['/edit-product', p.id]" class="btn btn-edit">Edit</a>
+              <button (click)="delete(p.id)" class="btn btn-delete">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
     <p class="empty-msg">No products found.</p>
-  </ng-template>
+  }
 
 </div>

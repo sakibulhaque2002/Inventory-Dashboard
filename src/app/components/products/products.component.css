@@ -16,7 +16,6 @@
   font-size: 1.5rem;
 }
 
-/* toolbar */
 .toolbar {
   display: flex;
   gap: 12px;
@@ -26,21 +25,27 @@
 .search-input {
   flex: 1;
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 0.95rem;
 }
 
 .category-select {
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 0.95rem;
   background: white;
   cursor: pointer;
 }
 
-/* table */
+.search-input:focus,
+.category-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
 .product-table {
   width: 100%;
   border-collapse: collapse;
@@ -60,80 +65,30 @@
   color: #374151;
 }
 
-.product-table tbody tr:hover {
-  background: #f3f4f6;
-}
+.product-table tbody tr:hover { background: #f3f4f6; }
 
-/* low-stock row highlight */
-.low-stock-row {
-  background: #fff7ed !important;
-}
+.low-stock-row { background: #fff7ed !important; }
+.low-stock-row:hover { background: #ffedd5 !important; }
 
-.low-stock-row:hover {
-  background: #ffedd5 !important;
-}
-
-.badge-low {
+.badge {
   display: inline-block;
   margin-left: 8px;
   padding: 2px 7px;
-  background: #ef4444;
-  color: white;
   border-radius: 999px;
   font-size: 0.7rem;
   font-weight: 600;
   vertical-align: middle;
-}
-
-.stock-critical {
-  color: #ef4444;
-  font-weight: 700;
-}
-
-/* action buttons */
-.actions {
-  display: flex;
-  gap: 8px;
-}
-
-.btn {
-  padding: 6px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.btn-primary {
-  background: #3b82f6;
   color: white;
 }
 
-.btn-primary:hover {
-  background: #2563eb;
-}
+.badge-low { background: #f59e0b; }
+.badge-out { background: #ef4444; }
 
-.btn-edit {
-  background: #e5e7eb;
-  color: #111827;
-}
+.stock-warn { color: #f59e0b; font-weight: 700; }
+.stock-critical { color: #ef4444; font-weight: 700; }
 
-.btn-edit:hover {
-  background: #d1d5db;
-}
+.actions { display: flex; gap: 8px; }
 
-.btn-delete {
-  background: #fee2e2;
-  color: #b91c1c;
-}
-
-.btn-delete:hover {
-  background: #fca5a5;
-}
-
-/* empty state */
 .empty-msg {
   text-align: center;
   color: #9ca3af;

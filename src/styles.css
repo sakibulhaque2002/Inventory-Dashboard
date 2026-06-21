@@ -10,3 +10,33 @@ body {
   color: #111827;
   background: #f9fafb;
 }
+
+/* ── shared buttons ─────────────────────────────────────────────────────── */
+
+.btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.15s;
+}
+
+.btn-primary { background: #3b82f6; color: white; }
+.btn-primary:hover { background: #2563eb; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-edit { background: #e5e7eb; color: #111827; }
+.btn-edit:hover { background: #d1d5db; }
+
+.btn-delete { background: #fee2e2; color: #b91c1c; }
+.btn-delete:hover { background: #fca5a5; }
+
+.btn-cancel { background: #e5e7eb; color: #374151; }
+.btn-cancel:hover { background: #d1d5db; }
+
+.btn-restock { background: #3b82f6; color: white; }
+.btn-restock:hover { background: #2563eb; }

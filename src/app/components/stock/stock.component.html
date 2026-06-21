@@ -1,1 +1,83 @@
-<p>stock works!</p>
+<div class="stock-page">
+
+  <div class="page-header">
+    <h2>Stock Movement</h2>
+  </div>
+
+  <div class="movement-card">
+
+    <div class="field">
+      <label for="product">Product</label>
+      <select id="product" [(ngModel)]="selectedProductId">
+        <option [ngValue]="null" disabled>Select a product...</option>
+        @for (p of products; track p.id) {
+          <option [ngValue]="p.id">{{ p.name }} ({{ p.stock }} in stock)</option>
+        }
+      </select>
+    </div>
+
+    @if (selectedProduct) {
+      <div class="stock-preview">
+        <span class="label">Current stock</span>
+        <span class="value" [ngClass]="{ low: isLowStock(selectedProduct) }">
+          {{ selectedProduct.stock }}
+        </span>
+      </div>
+    }
+
+    <div class="field">
+      <label>Movement Type</label>
+      <div class="toggle-group">
+        <button type="button" [ngClass]="{ active: movementType === 'in' }"  (click)="movementType = 'in'">Stock In</button>
+        <button type="button" [ngClass]="{ active: movementType === 'out' }" (click)="movementType = 'out'">Stock Out</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="amount">Amount</label>
+      <input id="amount" type="number" min="1" placeholder="Enter quantity" [(ngModel)]="amount" />
+    </div>
+
+    @if (lastMessage) {
+      <div class="feedback" [ngClass]="lastMessage.type">{{ lastMessage.text }}</div>
+    }
+
+    <button class="btn btn-primary btn-submit" [disabled]="!canSubmit" (click)="apply()">
+      Apply Movement
+    </button>
+
+  </div>
+
+  <div class="overview">
+    <h3>All Products</h3>
+    <table class="stock-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Stock</th>
+          <th>Threshold</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of products; track p.id) {
+          <tr [ngClass]="{ 'low-row': isLowStock(p) }">
+            <td>{{ p.name }}</td>
+            <td>{{ p.category }}</td>
+            <td [ngClass]="{ 'low-val': isLowStock(p) }">{{ p.stock }}</td>
+            <td>{{ p.lowStockThreshold }}</td>
+            <td>
+              @if (p.stock | stockStatus:p.lowStockThreshold) {
+                <span class="status-badge" [class.out]="p.stock === 0" [class.low]="p.stock > 0 && isLowStock(p)">
+                  {{ p.stock | stockStatus:p.lowStockThreshold }}
+                </span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>

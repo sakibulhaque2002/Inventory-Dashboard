@@ -1,1 +1,37 @@
-<p>low-stock works!</p>
+<div class="page">
+
+  <h2>Low Stock @if (products.length) {<span class="count">{{ products.length }}</span>}</h2>
+
+  @if (products.length === 0) {
+    <p class="empty">All products are well-stocked.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Stock</th>
+          <th>Threshold</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of products; track p.id) {
+          <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.category }}</td>
+            <td class="stock-val" [class.zero]="p.stock === 0">{{ p.stock }}</td>
+            <td>{{ p.lowStockThreshold }}</td>
+            <td><span class="status-badge" [class.zero]="p.stock === 0">{{ p.stock | stockStatus:p.lowStockThreshold }}</span></td>
+            <td class="actions">
+              <a [routerLink]="['/stock']" class="btn btn-restock">Restock</a>
+              <a [routerLink]="['/edit-product', p.id]" class="btn btn-edit">Edit</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+</div>

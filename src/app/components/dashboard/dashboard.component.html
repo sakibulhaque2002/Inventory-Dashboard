@@ -1,1 +1,39 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+
+  <h2>Dashboard</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <span class="card-label">Total Products</span>
+      <span class="card-value">{{ totalProducts }}</span>
+      <a routerLink="/products" class="card-link">View all</a>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Total Stock</span>
+      <span class="card-value">{{ totalStock }}</span>
+      <a routerLink="/stock" class="card-link">Manage stock</a>
+    </div>
+
+    <div class="card" [class.card-warn]="lowStockCount > 0">
+      <span class="card-label">Low Stock Items</span>
+      <span class="card-value">{{ lowStockCount }}</span>
+      <a routerLink="/low-stock" class="card-link">View</a>
+    </div>
+
+    <div class="card" [class.card-danger]="outOfStock > 0">
+      <span class="card-label">Out of Stock</span>
+      <span class="card-value">{{ outOfStock }}</span>
+      <a routerLink="/low-stock" class="card-link">View</a>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Categories</span>
+      <span class="card-value">{{ totalCategories }}</span>
+      <a routerLink="/products" class="card-link">View all</a>
+    </div>
+
+  </div>
+
+</div>

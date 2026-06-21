@@ -57,35 +57,7 @@
   color: #ef4444;
 }
 
-.form-actions {
-  margin-top: 8px;
-}
+.form-actions { margin-top: 8px; }
 
-/* shared button styles */
-.btn {
-  padding: 9px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.btn-primary {
-  background: #3b82f6;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #2563eb;
-}
-
-.btn-cancel {
-  background: #e5e7eb;
-  color: #374151;
-}
-
-.btn-cancel:hover {
-  background: #d1d5db;
-}
+/* form buttons are larger than table buttons */
+.btn { padding: 9px 20px; font-size: 0.9rem; }

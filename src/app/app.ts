@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -8,10 +8,10 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
     <nav class="navbar">
       <span class="brand">Inventory</span>
       <div class="nav-links">
-        <a routerLink="/dashboard"  routerLinkActive="active">Dashboard</a>
-        <a routerLink="/products"   routerLinkActive="active">Products</a>
-        <a routerLink="/stock"      routerLinkActive="active">Stock</a>
-        <a routerLink="/low-stock"  routerLinkActive="active">Low Stock</a>
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/products"  routerLinkActive="active">Products</a>
+        <a routerLink="/stock"     routerLinkActive="active">Stock</a>
+        <a routerLink="/low-stock" routerLinkActive="active">Low Stock</a>
       </div>
     </nav>
     <main>
@@ -45,19 +45,9 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
       font-size: 0.9rem;
       transition: background 0.15s, color 0.15s;
     }
-    .nav-links a:hover {
-      background: #334155;
-      color: white;
-    }
-    .nav-links a.active {
-      background: #3b82f6;
-      color: white;
-    }
-    main {
-      padding: 8px 0;
-    }
+    .nav-links a:hover { background: #334155; color: white; }
+    .nav-links a.active { background: #3b82f6; color: white; }
+    main { padding: 8px 0; }
   `],
 })
-export class App {
-  protected readonly title = signal('inventory-dashboard');
-}
+export class App {}

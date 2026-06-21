@@ -14,7 +14,7 @@ const SEED_PRODUCTS: Product[] = [
   providedIn: 'root',
 })
 export class ProductService {
-  private storageKey = 'inv_products';
+  private storageKey = 'inventory_products';
   private products: Product[] = [];
 
   constructor() {

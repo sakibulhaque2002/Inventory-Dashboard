@@ -10,31 +10,41 @@
     <div class="field">
       <label for="name">Name</label>
       <input id="name" type="text" formControlName="name" placeholder="e.g. Wireless Mouse" />
-      <span class="error" *ngIf="isInvalid('name')">Name is required.</span>
+      @if (isInvalid('name')) {
+        <span class="error">Name is required.</span>
+      }
     </div>
 
     <div class="field">
       <label for="category">Category</label>
       <input id="category" type="text" formControlName="category" placeholder="e.g. Electronics" />
-      <span class="error" *ngIf="isInvalid('category')">Category is required.</span>
+      @if (isInvalid('category')) {
+        <span class="error">Category is required.</span>
+      }
     </div>
 
     <div class="field">
       <label for="price">Price ($)</label>
       <input id="price" type="number" formControlName="price" placeholder="0.00" />
-      <span class="error" *ngIf="isInvalid('price')">Price is required.</span>
+      @if (isInvalid('price')) {
+        <span class="error">Price is required.</span>
+      }
     </div>
 
     <div class="field">
       <label for="stock">Stock</label>
       <input id="stock" type="number" formControlName="stock" placeholder="0" />
-      <span class="error" *ngIf="isInvalid('stock')">Stock is required.</span>
+      @if (isInvalid('stock')) {
+        <span class="error">Stock is required.</span>
+      }
     </div>
 
     <div class="field">
       <label for="lowStockThreshold">Low Stock Threshold</label>
       <input id="lowStockThreshold" type="number" formControlName="lowStockThreshold" />
-      <span class="error" *ngIf="isInvalid('lowStockThreshold')">Threshold is required.</span>
+      @if (isInvalid('lowStockThreshold')) {
+        <span class="error">Threshold is required.</span>
+      }
     </div>
 
     <div class="form-actions">
